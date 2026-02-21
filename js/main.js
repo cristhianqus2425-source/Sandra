@@ -139,8 +139,8 @@ function buildSlide(s, idx) {
                 </div>
                 <div class="no-response" id="noResponse"></div>
                 <div class="yes-response" id="yesResp">
-                    <h2>Te quiero, Sandra ❤️</h2>
-                    <p>Gracias por darme otra oportunidad para hacerlo bien.</p>
+                    <h2>En serio te quiero ❤️</h2>
+                    <p>Gracias por darme una oportunidad, no va a volver a pasar. Te quiero mucho, Sandra.</p>
                 </div>
             </div>`;
     }
@@ -380,11 +380,11 @@ function initNoBtn() {
     let noCount = 0;
 
     const messages = [
-        { icon: '🥺', text: '¿En serio no me vas a perdonar?',   cls: '' },
-        { icon: '💔', text: '¿De verdad no me perdonas?',         cls: '' },
+        { icon: '🥺', text: '¿En serio? Piénsalo bien...',        cls: '' },
+        { icon: '💛', text: 'Piénsalo bien... yo te quiero mucho', cls: '' },
         {
             icon: '❤️',
-            text: 'Lo siento por no poder darte la calma y el apoyo que necesitabas... Igual siempre te querré.',
+            text: 'Lo siento, te quiero mucho y perdón por no ser suficiente y no darte la calma y paz que mereces... te quiero.',
             cls: 'final'
         }
     ];
@@ -411,6 +411,8 @@ function initNoBtn() {
             localStorage.setItem('respuesta_fecha', new Date().toLocaleString('es-PE'));
 
             setTimeout(() => {
+                const forgiveBtn = document.getElementById('forgiveBtn');
+                if (forgiveBtn) gsap.to(forgiveBtn, { opacity: 0, scale: 0.5, duration: 0.6, ease: 'power2.in', onComplete: () => forgiveBtn.remove() });
                 gsap.to(noBtn, {
                     opacity: 0, scale: 0.5, duration: 0.6,
                     ease: 'power2.in',
