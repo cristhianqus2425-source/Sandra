@@ -335,6 +335,10 @@ function initForgiveBtn() {
     const colors = ['#ff6b9d','#ffd93d','#a29bfe','#ff9cc4','#ffffff','#ffb3d1'];
 
     btn.addEventListener('click', function () {
+        // Save answer
+        localStorage.setItem('respuesta', 'si');
+        localStorage.setItem('respuesta_fecha', new Date().toLocaleString('es-PE'));
+
         confetti({ particleCount: 80,  spread: 80,  origin: { y: 0.7 }, colors });
         setTimeout(() => confetti({ particleCount: 60, spread: 110, origin: { y: 0.65 }, colors }), 250);
         setTimeout(() => confetti({ particleCount: 40, angle: 60,  spread: 70, origin: { x: 0, y: 0.7 }, colors }), 400);
@@ -365,7 +369,7 @@ function initForgiveBtn() {
 }
 
 /* =====================================================
-   EVASIVE NO BUTTON
+   NO BUTTON
 ===================================================== */
 function initNoBtn() {
     const noBtn  = document.getElementById('noBtn');
@@ -374,7 +378,6 @@ function initNoBtn() {
     noBtn._inited = true;
 
     let noCount = 0;
-    let isFixed = false;
 
     const messages = [
         { icon: '🥺', text: '¿En serio no me vas a perdonar?',   cls: '' },
@@ -385,30 +388,6 @@ function initNoBtn() {
             cls: 'final'
         }
     ];
-
-    function makeFixed() {
-        if (isFixed) return;
-        isFixed = true;
-        const r = noBtn.getBoundingClientRect();
-        document.body.appendChild(noBtn);
-        Object.assign(noBtn.style, {
-            position: 'fixed',
-            left:     r.left + 'px',
-            top:      r.top  + 'px',
-            margin:   '0',
-            zIndex:   '9998'
-        });
-    }
-
-    function dodge() {
-        makeFixed();
-        const pad = 20;
-        const bw  = noBtn.offsetWidth  + pad;
-        const bh  = noBtn.offsetHeight + pad;
-        const nx  = pad + Math.random() * (window.innerWidth  - bw);
-        const ny  = pad + Math.random() * (window.innerHeight - bh);
-        gsap.to(noBtn, { left: nx, top: ny, duration: 0.38, ease: 'back.out(2)' });
-    }
 
     function showNoMessage(idx) {
         const m = messages[idx];
@@ -427,6 +406,10 @@ function initNoBtn() {
         noCount++;
 
         if (noCount >= 3) {
+            // Save answer on final No message
+            localStorage.setItem('respuesta', 'no');
+            localStorage.setItem('respuesta_fecha', new Date().toLocaleString('es-PE'));
+
             setTimeout(() => {
                 gsap.to(noBtn, {
                     opacity: 0, scale: 0.5, duration: 0.6,
@@ -434,23 +417,42 @@ function initNoBtn() {
                     onComplete: () => noBtn.remove()
                 });
             }, 800);
-        } else {
-            dodge();
         }
     });
+}
 
-    // Desktop: dodge on hover
-    noBtn.addEventListener('mouseenter', () => {
-        if (noCount < 3) dodge();
-    });
+/* =====================================================
+   CHECK PANEL — visita la página con ?check en la URL
+===================================================== */
+if (new URLSearchParams(window.location.search).has('check')) {
+    const resp   = localStorage.getItem('respuesta');
+    const fecha  = localStorage.getItem('respuesta_fecha') || '—';
+    const emoji  = resp === 'si' ? '❤️' : resp === 'no' ? '💔' : '🕐';
+    const texto  = resp === 'si'
+        ? 'Dijo que <strong>Sí</strong> ❤️'
+        : resp === 'no'
+        ? 'Dijo que <strong>No</strong> 💔'
+        : 'Todavía no ha respondido';
 
-    // Mobile: dodge on touchstart (before tap fires)
-    noBtn.addEventListener('touchstart', (e) => {
-        if (noCount < 3) {
-            e.preventDefault();
-            dodge();
-        }
-    }, { passive: false });
+    const panel = document.createElement('div');
+    panel.style.cssText = `
+        position:fixed;inset:0;z-index:99999;
+        background:#07050f;
+        display:flex;flex-direction:column;
+        align-items:center;justify-content:center;
+        text-align:center;padding:40px;
+        font-family:'Crimson Text',serif;color:#fff;
+    `;
+    panel.innerHTML = `
+        <div style="font-size:4rem;margin-bottom:24px">${emoji}</div>
+        <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.4rem,5vw,2.2rem);margin-bottom:12px">${texto}</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:36px">${fecha !== '—' ? 'el ' + fecha : ''}</p>
+        <button onclick="localStorage.clear();location.reload()" style="
+            padding:10px 28px;border-radius:100px;border:1px solid rgba(255,255,255,0.15);
+            background:transparent;color:rgba(255,255,255,0.35);font-size:13px;cursor:pointer;
+        ">Borrar respuesta</button>
+    `;
+    document.body.appendChild(panel);
 }
 
 /* =====================================================

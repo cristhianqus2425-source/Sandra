@@ -488,21 +488,22 @@ html, body {
     box-shadow: 0 14px 45px rgba(255,107,157,0.2);
 }
 
-/* No button */
+/* No button — subtle, does not call attention */
 .no-btn {
-    padding: 12px 40px;
-    font-size: clamp(0.9rem, 3.5vw, 1rem);
-    font-family: 'Playfair Display', serif;
+    padding: 10px 32px;
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
+    font-family: 'Crimson Text', serif;
     font-style: italic;
-    color: rgba(255,255,255,0.32);
+    color: rgba(255,255,255,0.18);
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: none;
     border-radius: 100px;
     cursor: pointer;
     touch-action: manipulation;
     user-select: none;
     position: relative;
     z-index: 20;
+    letter-spacing: 0.03em;
 }
 
 /* No response messages */
