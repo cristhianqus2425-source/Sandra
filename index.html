@@ -5,189 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Nuestra Historia ❤️ Sandra ❤️</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<!-- =====================================================
-     TAP OVERLAY
-===================================================== -->
+<!-- TAP OVERLAY (music start) -->
 <div class="tap-overlay" id="tapOverlay">
     <img src="assets/photos/1.jpeg" alt="" class="tap-overlay-photo" id="tapPhoto">
     <h2>Nuestra Historia</h2>
-    <p>Toca para empezar con nuestra canción...</p>
+    <p>Toca para empezar...</p>
     <div>
         <div class="tap-circle">♫</div>
         <p class="tap-label">Toca aquí</p>
     </div>
 </div>
 
-<!-- =====================================================
-     HERO
-===================================================== -->
-<section class="hero">
-    <div class="hero-bg"></div>
-    <div class="petals" id="petals"></div>
-    <div class="hero-content">
-        <h1 class="hero-title" id="heroTitle">Nuestra Historia</h1>
-        <p class="hero-subtitle" id="heroSub">Cada momento a tu lado fue un regalo que no me merezco perder...</p>
-    </div>
-    <div class="scroll-hint">
-        <span>Desplázate</span>
-        <div class="scroll-arrow"></div>
-    </div>
-</section>
+<!-- STORY -->
+<div class="story" id="story">
+    <div class="story-bars"  id="storyBars"></div>
+    <div class="slides-wrap" id="slidesWrap"></div>
+    <div class="tap-zone tap-zone--prev" id="tapPrev"></div>
+    <div class="tap-zone tap-zone--next" id="tapNext"></div>
+    <div class="tap-hint" id="tapHint">toca para continuar →</div>
+</div>
 
-<!-- =====================================================
-     TIMELINE
-===================================================== -->
-<section class="timeline-section">
-    <h2 class="section-heading" id="tlHeading"><span>Nuestros Momentos</span></h2>
-    <div class="timeline">
-
-        <!-- 1 — Primera foto de ella, Cusco -->
-        <div class="tl-item" data-tl>
-            <div class="tl-dot" style="background:var(--gold); color:var(--gold);"></div>
-            <div class="first-photo-wrap">
-                <div class="polaroid">
-                    <img src="assets/photos/1.jpeg" alt="La primera foto" loading="lazy">
-                    <p class="polaroid-caption">Cusco — sin saber aún que te volvería mi mundo 🌿</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2 — Texto: el inicio -->
-        <div class="tl-item right" data-tl>
-            <div class="tl-dot" style="background:var(--gold); color:var(--gold);"></div>
-            <div class="mem-card">
-                <p class="mem-label">El inicio de todo</p>
-                <span class="mem-emoji">📸✨</span>
-                <p class="mem-text">Esta fue la primera foto que te tomé. En ese momento no lo sabía, pero mi cámara ya estaba capturando a la persona más importante de mi vida. Fue el principio sin saberlo.</p>
-            </div>
-        </div>
-
-        <!-- 3 — Primera foto juntos -->
-        <div class="tl-item" data-tl>
-            <div class="tl-dot" style="background:var(--violet); color:var(--violet);"></div>
-            <div class="polaroid">
-                <img src="assets/photos/2.jpeg" alt="Primera foto juntos" loading="lazy" class="landscape">
-                <p class="polaroid-caption">La primera foto juntos 🤍</p>
-            </div>
-        </div>
-
-        <!-- 4 — Texto: primera foto juntos -->
-        <div class="tl-item right" data-tl>
-            <div class="tl-dot" style="background:var(--violet); color:var(--violet);"></div>
-            <div class="mem-card">
-                <p class="mem-label">La primera foto juntos</p>
-                <span class="mem-emoji">🏔️🤍</span>
-                <p class="mem-text">Aún no éramos nada, pero ya estábamos juntos. "El turista sabía cosas."</p>
-            </div>
-        </div>
-
-        <!-- 5 — Primera foto en relación -->
-        <div class="tl-item" data-tl>
-            <div class="tl-dot" style="background:var(--rose); color:var(--rose);"></div>
-            <div class="polaroid">
-                <img src="assets/photos/3.jpeg" alt="Primera foto en relación" loading="lazy">
-                <p class="polaroid-caption">La primera foto siendo tuyos 💕</p>
-            </div>
-        </div>
-
-        <!-- 6 — Texto: ya éramos novios -->
-        <div class="tl-item right" data-tl>
-            <div class="tl-dot" style="background:var(--rose); color:var(--rose);"></div>
-            <div class="mem-card">
-                <p class="mem-label">Ya éramos novios</p>
-                <span class="mem-emoji">🥰❤️</span>
-                <p class="mem-text">La primera foto ya siendo pareja. No hay nada en el mundo que se compare a eso.</p>
-            </div>
-        </div>
-
-        <!-- 7 — Primer viaje, atardecer -->
-        <div class="tl-item" data-tl>
-            <div class="tl-dot" style="background:var(--teal); color:var(--teal);"></div>
-            <div class="polaroid">
-                <img src="assets/photos/4.jpeg" alt="Primer viaje juntos" loading="lazy" class="landscape">
-                <p class="polaroid-caption">Nuestro primer viaje — el primero de muchos 🌇</p>
-            </div>
-        </div>
-
-        <!-- 8 — Texto: primer viaje -->
-        <div class="tl-item right" data-tl>
-            <div class="tl-dot" style="background:var(--teal); color:var(--teal);"></div>
-            <div class="mem-card">
-                <p class="mem-label">Nuestro primer viaje</p>
-                <span class="mem-emoji">🌴✈️</span>
-                <p class="mem-text">El primero de los viajes que íbamos a tener juntos. Ese atardecer contigo me hizo pensar en todos los que aún nos faltaban por ver. Y todavía nos faltan.</p>
-            </div>
-        </div>
-
-        <!-- 9 — Primer viaje, arco de noche -->
-        <div class="tl-item" data-tl>
-            <div class="tl-dot" style="background:var(--sky); color:var(--sky);"></div>
-            <div class="polaroid">
-                <img src="assets/photos/5.jpeg" alt="Primer viaje, de noche" loading="lazy">
-                <p class="polaroid-caption">No quiero que sea el último 🌙</p>
-            </div>
-        </div>
-
-        <!-- 10 — Texto: cierre timeline -->
-        <div class="tl-item right" data-tl>
-            <div class="tl-dot" style="background:var(--sky); color:var(--sky);"></div>
-            <div class="mem-card">
-                <p class="mem-label">Quedan muchos más</p>
-                <span class="mem-emoji">🗺️💙</span>
-                <p class="mem-text">Este viaje no puede ser el último. Hay demasiados lugares que quiero conocer contigo, demasiadas fotos que aún nos faltan tomar. No quiero que esta sea la última página.</p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- =====================================================
-     BREAK SECTION
-===================================================== -->
-<section class="break-section">
-    <div class="fading-line"></div>
-    <div class="empty-frame" id="emptyFrame">
-        <div class="ef-icon">📷</div>
-        <p>Esta foto<br>aún no existe...</p>
-    </div>
-    <div class="sad-message">
-        <h2 id="sadTitle">"Aquí es donde me equivoqué."</h2>
-        <div class="quote-bar">
-            <p>"Y no quiero que nuestra historia se detenga aquí. Merecemos más fotos, más lugares, más atardeceres que añadir a esta línea de tiempo."</p>
-        </div>
-        <p class="body-text">Sé que fallé. No busco excusas. Solo sé que lo que tenemos —todo lo que esas fotos guardan— es demasiado valioso para dejarlo ir sin intentarlo todo.</p>
-    </div>
-</section>
-
-<!-- =====================================================
-     FINAL SECTION
-===================================================== -->
-<section class="final-section">
-    <img src="assets/photos/3.jpeg" alt="Nosotros" class="final-photo" id="finalPhoto">
-    <p class="final-pre" id="finalPre">Todavía quiero escribir esto contigo</p>
-    <p class="final-body">No como terminamos, sino como merecemos: con más viajes, más risas, más fotos que llenar juntos.</p>
-    <button class="forgive-btn" id="forgiveBtn">
-        💕 ¿Me perdonas y seguimos escribiendo esto? 💕
-    </button>
-    <div class="yes-response" id="yesResp">
-        <h2>Te Quiero ❤️ Sandra ❤️</h2>
-        <p>Gracias por darme otra oportunidad de ser la persona que mereces tener a tu lado.</p>
-    </div>
-</section>
-
-<!-- =====================================================
-     MUSIC PLAYER
-===================================================== -->
+<!-- MUSIC PLAYER -->
 <div class="music-player">
     <button class="music-btn" id="playBtn">▶</button>
     <div class="eq stopped" id="eq">
@@ -203,14 +48,9 @@
     <source src="assets/audio/cancion.mp3" type="audio/mpeg">
 </audio>
 
-<!-- =====================================================
-     LIBRARIES
-===================================================== -->
+<!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-
-<!-- App -->
 <script src="js/main.js"></script>
 
 </body>

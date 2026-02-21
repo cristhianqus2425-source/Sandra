@@ -1,13 +1,11 @@
 /* =====================================================
-   GSAP + ScrollTrigger
+   PETALS CONTAINER
 ===================================================== */
-gsap.registerPlugin(ScrollTrigger);
+const petalsCont = document.createElement('div');
+petalsCont.className = 'petals-cont';
+document.body.appendChild(petalsCont);
 
-/* =====================================================
-   FLOATING PETALS
-===================================================== */
-const EMOJIS    = ['❤️','🩷','💕','💗','💖','🌸','✨','🌺','💝','🌼'];
-const petalsCont = document.getElementById('petals');
+const EMOJIS = ['❤️','🩷','💕','💗','💖','🌸','✨','🌺','💝','🌼'];
 
 function spawnPetal() {
     const el = document.createElement('div');
@@ -22,100 +20,262 @@ function spawnPetal() {
     setTimeout(() => el.remove(), (dur + 5) * 1000);
 }
 
-for (let i = 0; i < 10; i++) spawnPetal();
-setInterval(spawnPetal, 900);
+/* =====================================================
+   SLIDES DATA
+===================================================== */
+const SLIDES = [
+    {
+        type:      'photo',
+        bg:        'assets/photos/1.jpeg',
+        img:       'assets/photos/1.jpeg',
+        label:     '★ La primera foto ★',
+        caption:   'Cusco — sin saber aún que te volverías mi mundo 🌿',
+        text:      'Esta fue la primera foto que te tomé... sin saber todavía que te ibas a volver la persona más importante en mi vida.',
+        accent:    '#ffd93d',
+        landscape: false
+    },
+    {
+        type:      'photo',
+        bg:        'assets/photos/2.jpeg',
+        img:       'assets/photos/2.jpeg',
+        label:     'La primera foto juntos',
+        caption:   '"El turista sabía cosas" 🏔️',
+        text:      'Aún no éramos nada oficial, pero ya estábamos juntos. Ya sentía que iba a ser algo especial.',
+        accent:    '#a29bfe',
+        landscape: true
+    },
+    {
+        type:      'photo',
+        bg:        'assets/photos/3.jpeg',
+        img:       'assets/photos/3.jpeg',
+        label:     'Ya éramos novios',
+        caption:   'La primera foto siendo tuyos 💕',
+        text:      'Saber que eras mía y yo era tuyo... eso era todo lo que necesitaba.',
+        accent:    '#ff6b9d',
+        landscape: false
+    },
+    {
+        type:      'photo',
+        bg:        'assets/photos/4.jpeg',
+        img:       'assets/photos/4.jpeg',
+        label:     'Nuestro primer viaje',
+        caption:   'El primero de muchos 🌇',
+        text:      'Ese atardecer contigo me hizo pensar en todos los lugares que quiero ver a tu lado.',
+        accent:    '#55efc4',
+        landscape: true
+    },
+    {
+        type:      'photo',
+        bg:        'assets/photos/5.jpeg',
+        img:       'assets/photos/5.jpeg',
+        label:     'El mismo viaje',
+        caption:   'No quiero que sea el último 🌙',
+        text:      'Hay demasiados lugares que quiero conocer contigo. No quiero que este sea el último.',
+        accent:    '#74b9ff',
+        landscape: false
+    },
+    {
+        type:   'break',
+        accent: '#ff6b9d',
+        title:  '"Aquí es donde me equivoqué."',
+        quote:  'Y no quiero que nuestra historia se detenga aquí...',
+        text:   'Sé que fallé. No busco excusas. Solo sé que lo que vivimos es demasiado bonito para terminarlo así.'
+    },
+    {
+        type:   'final',
+        bg:     'assets/photos/3.jpeg',
+        img:    'assets/photos/3.jpeg',
+        accent: '#ff6b9d',
+        title:  'Todavía quiero escribir esto contigo',
+        text:   'No como terminamos, sino como merecemos.'
+    }
+];
 
 /* =====================================================
-   HERO ENTRANCE
+   BUILD SLIDE HTML
 ===================================================== */
-gsap.timeline({ delay: 0.3 })
-    .from('#heroTitle', { y: 70, opacity: 0, duration: 1.4, ease: 'power4.out' })
-    .from('#heroSub',   { y: 40, opacity: 0, duration: 1.1, ease: 'power3.out' }, '-=0.8')
-    .from('.scroll-hint', { opacity: 0, duration: 0.8, ease: 'power2.out' },      '-=0.4');
+function buildSlide(s, idx) {
+    const el = document.createElement('div');
+    el.className = 'slide';
+    el.dataset.idx = idx;
+
+    if (s.type === 'photo') {
+        el.innerHTML = `
+            <div class="slide-bg" style="background-image:url('${s.bg}')"></div>
+            <div class="slide-inner">
+                <div class="slide-polaroid">
+                    <img src="${s.img}" alt="" class="${s.landscape ? 'landscape' : ''}">
+                    <p class="slide-polaroid-caption">${s.caption}</p>
+                </div>
+                <div class="slide-card">
+                    <div class="slide-label" style="color:${s.accent}">${s.label}</div>
+                    <p class="slide-text">${s.text}</p>
+                </div>
+            </div>`;
+
+    } else if (s.type === 'break') {
+        el.innerHTML = `
+            <div class="slide-bg" style="background:radial-gradient(ellipse at 50% 60%,rgba(100,20,60,0.55) 0%,#04030a 80%)"></div>
+            <div class="break-slide-inner">
+                <div class="break-frame">
+                    <div class="break-frame-icon">📷</div>
+                    <p>Aquí debería haber<br>más fotos...<br>Pero me equivoqué.</p>
+                </div>
+                <h2 class="break-title">${s.title}</h2>
+                <div class="break-quote"><p>${s.quote}</p></div>
+                <p class="break-body">${s.text}</p>
+            </div>`;
+
+    } else { // final
+        el.innerHTML = `
+            <div class="slide-bg" style="background-image:url('${s.bg}')"></div>
+            <div class="final-slide-inner">
+                <img src="${s.img}" alt="" class="final-photo">
+                <h2 class="final-title">${s.title}</h2>
+                <p class="final-body">${s.text}</p>
+                <div class="btn-group">
+                    <button class="forgive-btn" id="forgiveBtn">¿Me perdonas y seguimos escribiendo esto? ❤️</button>
+                    <button class="no-btn" id="noBtn">No</button>
+                </div>
+                <div class="no-response" id="noResponse"></div>
+                <div class="yes-response" id="yesResp">
+                    <h2>Te quiero, Sandra ❤️</h2>
+                    <p>Gracias por darme otra oportunidad para hacerlo bien.</p>
+                </div>
+            </div>`;
+    }
+
+    return el;
+}
 
 /* =====================================================
-   SECTION HEADING
+   STORY INIT
 ===================================================== */
-gsap.from('#tlHeading', {
-    scrollTrigger: { trigger: '#tlHeading', start: 'top 85%' },
-    y: 50, opacity: 0, duration: 1, ease: 'power3.out'
+const storyEl   = document.getElementById('story');
+const storyBars = document.getElementById('storyBars');
+const slidesWrap = document.getElementById('slidesWrap');
+const tapPrev   = document.getElementById('tapPrev');
+const tapNext   = document.getElementById('tapNext');
+const tapHint   = document.getElementById('tapHint');
+
+let current  = 0;
+let animating = false;
+
+// Build progress bars
+SLIDES.forEach(() => {
+    const bar = document.createElement('div');
+    bar.className = 'story-bar';
+    bar.innerHTML = '<div class="story-bar-fill"></div>';
+    storyBars.appendChild(bar);
+});
+
+// Build slides — all off-screen except first
+const slideEls = SLIDES.map((s, i) => {
+    const el = buildSlide(s, i);
+    slidesWrap.appendChild(el);
+    if (i !== 0) gsap.set(el, { xPercent: 100, opacity: 0 });
+    return el;
 });
 
 /* =====================================================
-   TIMELINE ITEMS
+   PROGRESS BARS UPDATE
 ===================================================== */
-document.querySelectorAll('[data-tl]').forEach(item => {
-    const isRight = item.classList.contains('right');
-    gsap.from(item.children, {
-        scrollTrigger: { trigger: item, start: 'top 88%' },
-        x:       isRight ? 70 : -70,
-        opacity: 0,
-        duration: 0.95,
-        ease:    'power3.out',
-        stagger: 0.12
-    });
-});
-
-/* =====================================================
-   BREAK SECTION
-===================================================== */
-gsap.from('#emptyFrame', {
-    scrollTrigger: { trigger: '#emptyFrame', start: 'top 80%' },
-    scale: 0.85, opacity: 0, duration: 1.2, ease: 'power3.out'
-});
-
-gsap.from('#sadTitle', {
-    scrollTrigger: { trigger: '#sadTitle', start: 'top 85%' },
-    y: 40, opacity: 0, duration: 1, ease: 'power3.out'
-});
-
-/* =====================================================
-   FINAL SECTION
-===================================================== */
-gsap.from('#finalPhoto', {
-    scrollTrigger: { trigger: '#finalPhoto', start: 'top 85%' },
-    scale: 0.7, opacity: 0, duration: 1.3, ease: 'back.out(1.5)'
-});
-
-gsap.from('#finalPre', {
-    scrollTrigger: { trigger: '#finalPre', start: 'top 90%' },
-    y: 30, opacity: 0, duration: 1, ease: 'power3.out'
-});
-
-gsap.from('.forgive-btn', {
-    scrollTrigger: { trigger: '.forgive-btn', start: 'top 90%' },
-    scale: 0.8, opacity: 0, duration: 1.1, ease: 'back.out(1.8)'
-});
-
-/* =====================================================
-   3D POLAROID TILT (desktop only)
-===================================================== */
-if (window.matchMedia('(hover: hover)').matches) {
-    document.querySelectorAll('.polaroid').forEach(card => {
-        card.style.transition = 'none';
-
-        card.addEventListener('mousemove', e => {
-            const r = card.getBoundingClientRect();
-            const x = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
-            const y = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
-            gsap.to(card, {
-                rotateY:            x * 14,
-                rotateX:           -y * 14,
-                scale:              1.04,
-                duration:           0.35,
-                ease:               'power2.out',
-                transformPerspective: 600
-            });
-        });
-
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                rotateY: 0, rotateX: 0, scale: 1,
-                duration: 0.6, ease: 'power3.out'
-            });
-        });
+function updateBars(idx) {
+    storyBars.querySelectorAll('.story-bar-fill').forEach((f, i) => {
+        f.style.width = i <= idx ? '100%' : '0%';
     });
 }
+
+updateBars(0);
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+function navigate(dir) {
+    if (animating) return;
+    const next = current + dir;
+    if (next < 0 || next >= SLIDES.length) return;
+
+    animating = true;
+
+    const curEl  = slideEls[current];
+    const nextEl = slideEls[next];
+
+    // Position incoming slide off-screen
+    gsap.set(nextEl, { xPercent: dir > 0 ? 105 : -105, opacity: 0 });
+
+    // Outgoing slide
+    gsap.to(curEl, {
+        xPercent: dir > 0 ? -40 : 40,
+        opacity:  0,
+        duration: 0.45,
+        ease:     'power3.in'
+    });
+
+    // Incoming slide
+    gsap.to(nextEl, {
+        xPercent: 0,
+        opacity:  1,
+        duration: 0.52,
+        ease:     'power3.out',
+        delay:    0.05
+    });
+
+    current = next;
+    updateBars(current);
+
+    // Hide tap hint after first advance
+    if (current > 0) gsap.to(tapHint, { opacity: 0, duration: 0.5 });
+
+    // Final slide: disable tap zones (buttons handle interaction)
+    const isFinal = current === SLIDES.length - 1;
+    tapPrev.style.display = isFinal ? 'none' : '';
+    tapNext.style.display = isFinal ? 'none' : '';
+    tapHint.style.display = isFinal ? 'none' : '';
+
+    if (isFinal) {
+        setTimeout(() => {
+            initForgiveBtn();
+            initNoBtn();
+        }, 600);
+    }
+
+    setTimeout(() => { animating = false; }, 600);
+}
+
+/* =====================================================
+   TAP ZONES
+===================================================== */
+tapPrev.addEventListener('click', () => navigate(-1));
+tapNext.addEventListener('click', () => navigate(1));
+
+/* =====================================================
+   SWIPE SUPPORT
+===================================================== */
+let touchStartX = 0;
+let touchStartY = 0;
+
+storyEl.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+storyEl.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    // Only treat as swipe if horizontal movement dominates
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 44) {
+        navigate(dx < 0 ? 1 : -1);
+    }
+}, { passive: true });
+
+/* =====================================================
+   KEYBOARD (desktop)
+===================================================== */
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') navigate(1);
+    if (e.key === 'ArrowLeft')  navigate(-1);
+});
 
 /* =====================================================
    AUDIO
@@ -141,19 +301,21 @@ playBtn.addEventListener('click', () => {
 });
 
 /* =====================================================
-   TAP OVERLAY
+   TAP OVERLAY (autoplay gate)
 ===================================================== */
 const overlay = document.getElementById('tapOverlay');
 
-gsap.from('#tapPhoto',         { scale: 0.7, opacity: 0, duration: 1.2, ease: 'back.out(1.6)', delay: 0.2 });
-gsap.from('.tap-overlay h2',   { y: 30,      opacity: 0, duration: 1.0, ease: 'power3.out',    delay: 0.6 });
-gsap.from('.tap-overlay p',    { y: 20,      opacity: 0, duration: 0.9, ease: 'power3.out',    delay: 0.9 });
-gsap.from('.tap-circle',       { scale: 0,   opacity: 0, duration: 0.8, ease: 'back.out(2)',   delay: 1.1 });
+gsap.from('#tapPhoto',       { scale: 0.7, opacity: 0, duration: 1.2, ease: 'back.out(1.6)', delay: 0.2 });
+gsap.from('.tap-overlay h2', { y: 30,      opacity: 0, duration: 1.0, ease: 'power3.out',    delay: 0.6 });
+gsap.from('.tap-overlay p',  { y: 20,      opacity: 0, duration: 0.9, ease: 'power3.out',    delay: 0.9 });
+gsap.from('.tap-circle',     { scale: 0,   opacity: 0, duration: 0.8, ease: 'back.out(2)',   delay: 1.1 });
 
 function dismissOverlay() {
     audio.play().catch(() => {});
     gsap.to(overlay, {
-        opacity: 0, duration: 0.85, ease: 'power2.inOut',
+        opacity: 0,
+        duration: 0.85,
+        ease: 'power2.inOut',
         onComplete: () => overlay.remove()
     });
 }
@@ -165,31 +327,134 @@ audio.play().then(dismissOverlay).catch(() => {
 /* =====================================================
    FORGIVE BUTTON
 ===================================================== */
-document.getElementById('forgiveBtn').addEventListener('click', function () {
+function initForgiveBtn() {
+    const btn = document.getElementById('forgiveBtn');
+    if (!btn || btn._inited) return;
+    btn._inited = true;
+
     const colors = ['#ff6b9d','#ffd93d','#a29bfe','#ff9cc4','#ffffff','#ffb3d1'];
 
-    // Confetti
-    confetti({ particleCount: 80,  spread: 80,  origin: { y: 0.7 }, colors });
-    setTimeout(() => confetti({ particleCount: 60, spread: 110, origin: { y: 0.65 }, colors }), 250);
-    setTimeout(() => confetti({ particleCount: 40, angle: 60,  spread: 70, origin: { x: 0, y: 0.7 }, colors }), 400);
-    setTimeout(() => confetti({ particleCount: 40, angle: 120, spread: 70, origin: { x: 1, y: 0.7 }, colors }), 400);
+    btn.addEventListener('click', function () {
+        confetti({ particleCount: 80,  spread: 80,  origin: { y: 0.7 }, colors });
+        setTimeout(() => confetti({ particleCount: 60, spread: 110, origin: { y: 0.65 }, colors }), 250);
+        setTimeout(() => confetti({ particleCount: 40, angle: 60,  spread: 70, origin: { x: 0, y: 0.7 }, colors }), 400);
+        setTimeout(() => confetti({ particleCount: 40, angle: 120, spread: 70, origin: { x: 1, y: 0.7 }, colors }), 400);
 
-    // Extra petals
-    for (let i = 0; i < 25; i++) spawnPetal();
+        for (let i = 0; i < 25; i++) spawnPetal();
 
-    // Show response
-    const resp = document.getElementById('yesResp');
-    resp.style.display = 'block';
-    gsap.from(resp, { y: 40, opacity: 0, duration: 1.2, ease: 'power3.out', delay: 0.2 });
+        // Remove the No button
+        const noBtn = document.getElementById('noBtn');
+        if (noBtn) gsap.to(noBtn, { opacity: 0, duration: 0.4, onComplete: () => noBtn.remove() });
 
-    // Raise volume gently
-    audio.play().catch(() => {});
-    let v = audio.volume;
-    const bump = setInterval(() => {
-        if (v < 0.75) { v = Math.min(v + 0.05, 0.75); audio.volume = v; }
-        else clearInterval(bump);
-    }, 100);
+        // Show yes response
+        const resp = document.getElementById('yesResp');
+        resp.style.display = 'block';
+        gsap.from(resp, { y: 40, opacity: 0, duration: 1.2, ease: 'power3.out', delay: 0.2 });
 
-    setTimeout(() => resp.scrollIntoView({ behavior: 'smooth', block: 'center' }), 350);
-    this.disabled = true;
-});
+        // Bump volume
+        audio.play().catch(() => {});
+        let v = audio.volume;
+        const bump = setInterval(() => {
+            if (v < 0.75) { v = Math.min(v + 0.05, 0.75); audio.volume = v; }
+            else clearInterval(bump);
+        }, 100);
+
+        setTimeout(() => resp.scrollIntoView({ behavior: 'smooth', block: 'center' }), 350);
+        this.disabled = true;
+    });
+}
+
+/* =====================================================
+   EVASIVE NO BUTTON
+===================================================== */
+function initNoBtn() {
+    const noBtn  = document.getElementById('noBtn');
+    const noResp = document.getElementById('noResponse');
+    if (!noBtn || noBtn._inited) return;
+    noBtn._inited = true;
+
+    let noCount = 0;
+    let isFixed = false;
+
+    const messages = [
+        { icon: '🥺', text: '¿En serio no me vas a perdonar?',   cls: '' },
+        { icon: '💔', text: '¿De verdad no me perdonas?',         cls: '' },
+        {
+            icon: '❤️',
+            text: 'Lo siento por no poder darte la calma y el apoyo que necesitabas... Igual siempre te querré.',
+            cls: 'final'
+        }
+    ];
+
+    function makeFixed() {
+        if (isFixed) return;
+        isFixed = true;
+        const r = noBtn.getBoundingClientRect();
+        document.body.appendChild(noBtn);
+        Object.assign(noBtn.style, {
+            position: 'fixed',
+            left:     r.left + 'px',
+            top:      r.top  + 'px',
+            margin:   '0',
+            zIndex:   '9998'
+        });
+    }
+
+    function dodge() {
+        makeFixed();
+        const pad = 20;
+        const bw  = noBtn.offsetWidth  + pad;
+        const bh  = noBtn.offsetHeight + pad;
+        const nx  = pad + Math.random() * (window.innerWidth  - bw);
+        const ny  = pad + Math.random() * (window.innerHeight - bh);
+        gsap.to(noBtn, { left: nx, top: ny, duration: 0.38, ease: 'back.out(2)' });
+    }
+
+    function showNoMessage(idx) {
+        const m = messages[idx];
+        noResp.className = 'no-response ' + m.cls;
+        noResp.innerHTML = `<span class="no-icon">${m.icon}</span><p>${m.text}</p>`;
+        noResp.style.display = 'block';
+        gsap.fromTo(noResp,
+            { y: 20, opacity: 0 },
+            { y: 0,  opacity: 1, duration: 0.9, ease: 'power3.out' }
+        );
+    }
+
+    noBtn.addEventListener('click', () => {
+        if (noCount >= 3) return;
+        showNoMessage(noCount);
+        noCount++;
+
+        if (noCount >= 3) {
+            setTimeout(() => {
+                gsap.to(noBtn, {
+                    opacity: 0, scale: 0.5, duration: 0.6,
+                    ease: 'power2.in',
+                    onComplete: () => noBtn.remove()
+                });
+            }, 800);
+        } else {
+            dodge();
+        }
+    });
+
+    // Desktop: dodge on hover
+    noBtn.addEventListener('mouseenter', () => {
+        if (noCount < 3) dodge();
+    });
+
+    // Mobile: dodge on touchstart (before tap fires)
+    noBtn.addEventListener('touchstart', (e) => {
+        if (noCount < 3) {
+            e.preventDefault();
+            dodge();
+        }
+    }, { passive: false });
+}
+
+/* =====================================================
+   PETALS — start a few
+===================================================== */
+for (let i = 0; i < 6; i++) spawnPetal();
+setInterval(spawnPetal, 1100);
