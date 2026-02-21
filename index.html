@@ -6,7 +6,6 @@
     <title>Nuestra Historia ❤️</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -52,10 +51,10 @@
 
         .hero-subtitle {
             font-size: clamp(1rem, 3vw, 1.4rem);
-            color: rgba(255, 255, 255, 0.55);
+            color: rgba(255,255,255,0.55);
             font-style: italic;
-            max-width: 480px;
-            line-height: 1.8;
+            max-width: 500px;
+            line-height: 1.9;
         }
 
         .scroll-hint {
@@ -66,29 +65,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
-            color: rgba(255,255,255,0.35);
-            font-size: 13px;
-            letter-spacing: 2px;
+            gap: 8px;
+            color: rgba(255,255,255,0.3);
+            font-size: 12px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            animation: bob 2s ease-in-out infinite;
         }
 
         .scroll-arrow {
-            width: 24px;
-            height: 24px;
-            border-right: 2px solid rgba(255,255,255,0.3);
-            border-bottom: 2px solid rgba(255,255,255,0.3);
+            width: 22px;
+            height: 22px;
+            border-right: 2px solid rgba(255,255,255,0.25);
+            border-bottom: 2px solid rgba(255,255,255,0.25);
             transform: rotate(45deg);
             animation: bob 2s ease-in-out infinite;
+            margin-top: -6px;
         }
 
         @keyframes bob {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50%       { transform: translateX(-50%) translateY(8px); }
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50%       { transform: rotate(45deg) translateY(6px); }
         }
 
-        /* floating petals */
         .petals {
             position: absolute;
             inset: 0;
@@ -99,7 +97,6 @@
         .petal {
             position: absolute;
             bottom: -40px;
-            font-size: 1.4rem;
             animation: floatUp linear infinite;
             opacity: 0;
         }
@@ -107,16 +104,16 @@
         @keyframes floatUp {
             0%   { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
             8%   { opacity: 0.9; }
-            90%  { opacity: 0.4; }
-            100% { transform: translateY(-110vh) rotate(540deg) scale(0.5); opacity: 0; }
+            90%  { opacity: 0.35; }
+            100% { transform: translateY(-115vh) rotate(560deg) scale(0.5); opacity: 0; }
         }
 
         /* ==============================
            TIMELINE SECTION
         ============================== */
         .timeline-section {
-            background: linear-gradient(180deg, #0a0510 0%, #100510 100%);
-            padding: 90px 20px 100px;
+            background: linear-gradient(180deg, #0a0510 0%, #0d0610 100%);
+            padding: 90px 20px 110px;
         }
 
         .section-heading {
@@ -124,7 +121,6 @@
             font-size: clamp(1.8rem, 5vw, 3rem);
             color: #ff6b9d;
             margin-bottom: 70px;
-            position: relative;
         }
 
         .section-heading::after {
@@ -139,10 +135,11 @@
 
         .timeline {
             position: relative;
-            max-width: 860px;
+            max-width: 880px;
             margin: 0 auto;
         }
 
+        /* vertical glowing line */
         .timeline::before {
             content: '';
             position: absolute;
@@ -151,29 +148,28 @@
             bottom: 0;
             width: 2px;
             background: linear-gradient(180deg,
-                #ff6b9d 0%,
-                #a29bfe 30%,
-                #55efc4 60%,
-                #ffd93d 80%,
-                #ff6b9d 100%);
+                #ff6b9d 0%, #c084fc 20%, #818cf8 40%,
+                #34d399 60%, #fbbf24 80%, #ff6b9d 100%);
             transform: translateX(-50%);
+            filter: blur(0.5px);
         }
 
+        /* Items */
         .tl-item {
             display: flex;
             justify-content: flex-end;
-            padding-right: calc(50% + 45px);
-            margin-bottom: 70px;
+            padding-right: calc(50% + 48px);
+            margin-bottom: 72px;
             position: relative;
             opacity: 0;
             transform: translateX(-60px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transition: opacity 0.75s ease, transform 0.75s ease;
         }
 
         .tl-item.right {
             justify-content: flex-start;
             padding-right: 0;
-            padding-left: calc(50% + 45px);
+            padding-left: calc(50% + 48px);
             transform: translateX(60px);
         }
 
@@ -185,32 +181,32 @@
         .tl-dot {
             position: absolute;
             left: 50%;
-            top: 28px;
+            top: 30px;
             transform: translateX(-50%);
             width: 18px;
             height: 18px;
             border-radius: 50%;
             background: #ff6b9d;
-            border: 3px solid #fff;
-            box-shadow: 0 0 14px #ff6b9d;
+            border: 3px solid #0d0610;
+            box-shadow: 0 0 16px currentColor;
             z-index: 2;
         }
 
-        /* Memory card */
+        /* Text memory card */
         .mem-card {
             background: rgba(255,255,255,0.04);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 107, 157, 0.25);
+            border: 1px solid rgba(255, 107, 157, 0.22);
             border-radius: 20px;
             padding: 28px 26px;
             max-width: 370px;
             width: 100%;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .mem-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 22px 50px rgba(255,107,157,0.18);
+            box-shadow: 0 22px 50px rgba(255,107,157,0.16);
         }
 
         .mem-label {
@@ -222,93 +218,109 @@
         }
 
         .mem-emoji {
-            font-size: 2.2rem;
+            font-size: 2rem;
             display: block;
             margin-bottom: 12px;
         }
 
         .mem-text {
             font-size: 15px;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.8);
+            line-height: 1.85;
+            color: rgba(255,255,255,0.78);
         }
 
-        /* Polaroid card */
-        .polaroid-wrap {
+        /* Polaroid photo card */
+        .polaroid {
             background: #fff;
-            padding: 14px 14px 52px;
-            border-radius: 4px;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.55);
-            max-width: 280px;
-            transform: rotate(-1.5deg);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 13px 13px 50px;
+            border-radius: 3px;
+            box-shadow: 0 14px 40px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4);
+            max-width: 300px;
+            width: 100%;
+            transform: rotate(-2deg);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
             cursor: default;
         }
 
-        .polaroid-wrap:hover {
-            transform: rotate(0deg) scale(1.03);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.65);
+        .tl-item.right .polaroid { transform: rotate(1.8deg); }
+
+        .polaroid:hover,
+        .tl-item.right .polaroid:hover {
+            transform: rotate(0deg) scale(1.04);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.7);
         }
 
-        .polaroid-wrap img {
+        .polaroid img {
             width: 100%;
             display: block;
             border-radius: 2px;
-            aspect-ratio: 3/4;
             object-fit: cover;
+            aspect-ratio: 3/4;
+        }
+
+        /* special wide aspect for landscape photos */
+        .polaroid img.landscape {
+            aspect-ratio: 4/3;
         }
 
         .polaroid-caption {
             text-align: center;
             color: #333;
             font-style: italic;
-            font-size: 15px;
-            margin-top: 14px;
+            font-size: 14px;
+            margin-top: 13px;
+            line-height: 1.5;
+            font-family: 'Georgia', serif;
         }
 
-        /* Right-side polaroid slight opposite tilt */
-        .tl-item.right .polaroid-wrap {
-            transform: rotate(1.5deg);
+        /* First photo — special treatment */
+        .first-photo-wrap {
+            position: relative;
         }
 
-        .tl-item.right .polaroid-wrap:hover {
-            transform: rotate(0deg) scale(1.03);
+        .first-photo-wrap::before {
+            content: '★ La primera foto ★';
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 11px;
+            color: #ffd93d;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         /* ==============================
-           BREAK / SAD SECTION
+           BREAK — SAD SECTION
         ============================== */
         .break-section {
-            background: linear-gradient(180deg, #100510 0%, #050505 100%);
+            background: linear-gradient(180deg, #0d0610 0%, #050505 100%);
             padding: 100px 20px 110px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        /* Fading line into darkness */
         .fading-line {
             width: 2px;
-            height: 120px;
+            height: 130px;
             background: linear-gradient(180deg, #ff6b9d 0%, transparent 100%);
-            margin-bottom: 50px;
+            margin-bottom: 55px;
         }
 
-        /* Empty photo frame */
         .empty-frame {
-            width: 260px;
-            height: 340px;
-            border: 2px dashed rgba(255,255,255,0.18);
+            width: 240px;
+            height: 320px;
+            border: 2px dashed rgba(255,255,255,0.16);
             border-radius: 14px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-bottom: 50px;
-            background: rgba(255,255,255,0.015);
+            margin-bottom: 55px;
+            background: rgba(255,255,255,0.01);
             animation: framePulse 4s ease-in-out infinite;
             position: relative;
         }
@@ -316,41 +328,28 @@
         .empty-frame::before {
             content: '';
             position: absolute;
-            inset: -8px;
-            border-radius: 20px;
-            border: 1px dashed rgba(255,107,157,0.12);
+            inset: -9px;
+            border-radius: 21px;
+            border: 1px dashed rgba(255,107,157,0.1);
             animation: framePulse 4s ease-in-out infinite reverse;
         }
 
         @keyframes framePulse {
-            0%, 100% { border-color: rgba(255,255,255,0.18); }
-            50%       { border-color: rgba(255,107,157,0.35); }
+            0%, 100% { border-color: rgba(255,255,255,0.16); }
+            50%       { border-color: rgba(255,107,157,0.32); }
         }
 
-        .empty-frame .ef-icon {
-            font-size: 4rem;
-            opacity: 0.15;
-            margin-bottom: 14px;
-        }
+        .empty-frame .ef-icon { font-size: 3.5rem; opacity: 0.13; margin-bottom: 14px; }
+        .empty-frame p { color: rgba(255,255,255,0.2); font-style: italic; font-size: 14px; line-height: 1.8; }
 
-        .empty-frame p {
-            color: rgba(255,255,255,0.22);
-            font-style: italic;
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        /* Sad message */
-        .sad-message {
-            max-width: 600px;
-        }
+        .sad-message { max-width: 600px; }
 
         .sad-message h2 {
             font-size: clamp(1.6rem, 4.5vw, 2.6rem);
             color: rgba(255,255,255,0.88);
             font-style: italic;
             margin-bottom: 30px;
-            line-height: 1.4;
+            line-height: 1.45;
         }
 
         .quote-bar {
@@ -365,18 +364,18 @@
         .quote-bar p {
             font-size: 17px;
             font-style: italic;
-            color: rgba(255,255,255,0.75);
-            line-height: 1.9;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.95;
         }
 
         .sad-message .body-text {
             font-size: 16px;
-            color: rgba(255,255,255,0.5);
-            line-height: 1.9;
+            color: rgba(255,255,255,0.46);
+            line-height: 1.95;
         }
 
         /* ==============================
-           FINAL / BUTTON SECTION
+           FINAL SECTION
         ============================== */
         .final-section {
             min-height: 100vh;
@@ -392,19 +391,20 @@
         }
 
         .final-photo {
-            width: 190px;
-            height: 190px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
+            object-position: top center;
             border-radius: 50%;
             border: 5px solid #ff6b9d;
             box-shadow: 0 0 40px rgba(255,107,157,0.45), 0 0 80px rgba(255,107,157,0.15);
-            margin-bottom: 36px;
+            margin-bottom: 38px;
             animation: glow 3s ease-in-out infinite;
         }
 
         @keyframes glow {
             0%, 100% { box-shadow: 0 0 35px rgba(255,107,157,0.4),  0 0 70px rgba(255,107,157,0.1); }
-            50%       { box-shadow: 0 0 60px rgba(255,107,157,0.75), 0 0 120px rgba(255,107,157,0.25); }
+            50%       { box-shadow: 0 0 65px rgba(255,107,157,0.8), 0 0 130px rgba(255,107,157,0.28); }
         }
 
         .final-pre {
@@ -418,15 +418,15 @@
             font-size: 16px;
             color: rgba(255,255,255,0.42);
             max-width: 480px;
-            line-height: 1.9;
-            margin-bottom: 60px;
+            line-height: 1.95;
+            margin-bottom: 62px;
         }
 
-        /* THE BIG BUTTON */
+        /* BIG BUTTON */
         .forgive-btn {
             position: relative;
             display: inline-block;
-            padding: 26px 50px;
+            padding: 26px 52px;
             font-size: clamp(1.1rem, 3.5vw, 1.65rem);
             font-family: 'Georgia', serif;
             font-weight: bold;
@@ -437,10 +437,10 @@
             border-radius: 100px;
             cursor: pointer;
             animation: pulseBtn 2.2s ease-out infinite, bgShift 5s linear infinite;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, opacity 0.3s ease;
             max-width: 92%;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
         @keyframes pulseBtn {
@@ -456,8 +456,9 @@
 
         .forgive-btn:hover  { transform: scale(1.06); }
         .forgive-btn:active { transform: scale(0.97); }
+        .forgive-btn:disabled { opacity: 0.55; cursor: default; animation: none;
+            box-shadow: 0 18px 55px rgba(255,107,157,0.3); }
 
-        /* Response reveal */
         .yes-response {
             display: none;
             margin-top: 55px;
@@ -479,14 +480,14 @@
 
         .yes-response p {
             font-size: 18px;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.9;
-            max-width: 480px;
+            color: rgba(255,255,255,0.58);
+            line-height: 1.95;
+            max-width: 460px;
             margin: 0 auto;
         }
 
         /* ==============================
-           FLOATING MUSIC PLAYER
+           MUSIC PLAYER
         ============================== */
         .music-player {
             position: fixed;
@@ -496,12 +497,12 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(14px);
+            background: rgba(8, 8, 8, 0.88);
+            backdrop-filter: blur(16px);
             padding: 11px 20px;
             border-radius: 60px;
-            border: 1px solid rgba(255,107,157,0.3);
-            box-shadow: 0 10px 35px rgba(0,0,0,0.55);
+            border: 1px solid rgba(255,107,157,0.28);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.6);
         }
 
         .music-btn {
@@ -514,9 +515,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 15px;
+            font-size: 14px;
             transition: transform 0.2s;
             flex-shrink: 0;
+            color: #fff;
         }
 
         .music-btn:hover { transform: scale(1.12); }
@@ -525,12 +527,11 @@
 
         .music-name {
             font-size: 11px;
-            color: rgba(255,255,255,0.55);
+            color: rgba(255,255,255,0.5);
             font-style: italic;
             white-space: nowrap;
         }
 
-        /* Equalizer */
         .eq {
             display: flex;
             align-items: flex-end;
@@ -545,14 +546,14 @@
             animation: eqBar 0.7s ease-in-out infinite alternate;
         }
 
-        .eq-b:nth-child(1) { animation-delay: 0.0s; height: 8px; }
-        .eq-b:nth-child(2) { animation-delay: 0.2s; height: 16px; }
-        .eq-b:nth-child(3) { animation-delay: 0.1s; height: 11px; }
-        .eq-b:nth-child(4) { animation-delay: 0.3s; height: 18px; }
+        .eq-b:nth-child(1) { animation-delay: 0.00s; height: 8px; }
+        .eq-b:nth-child(2) { animation-delay: 0.20s; height: 16px; }
+        .eq-b:nth-child(3) { animation-delay: 0.10s; height: 11px; }
+        .eq-b:nth-child(4) { animation-delay: 0.30s; height: 18px; }
         .eq-b:nth-child(5) { animation-delay: 0.15s; height: 9px; }
 
         @keyframes eqBar {
-            from { transform: scaleY(0.25); }
+            from { transform: scaleY(0.2); }
             to   { transform: scaleY(1); }
         }
 
@@ -567,7 +568,7 @@
             .tl-item,
             .tl-item.right {
                 justify-content: flex-start;
-                padding-left: 52px;
+                padding-left: 50px;
                 padding-right: 0;
                 transform: translateX(-30px);
             }
@@ -575,20 +576,23 @@
             .tl-item.right { transform: translateX(30px); }
             .tl-dot { left: 18px; transform: none; }
 
-            .mem-card { max-width: 100%; }
-            .polaroid-wrap { max-width: 100%; }
-            .tl-item.right .polaroid-wrap,
-            .polaroid-wrap { transform: rotate(0); }
+            .mem-card    { max-width: 100%; }
+            .polaroid    { max-width: 100%; }
 
-            .forgive-btn { padding: 22px 30px; }
+            .polaroid,
+            .tl-item.right .polaroid { transform: rotate(0); }
+
+            .forgive-btn { padding: 22px 28px; }
+
+            .first-photo-wrap::before { font-size: 10px; top: -22px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ==============================
+<!-- ============================================================
      HERO
-============================== -->
+============================================================ -->
 <section class="hero">
     <div class="petals" id="petals"></div>
     <h1 class="hero-title">Nuestra Historia</h1>
@@ -599,108 +603,147 @@
     </div>
 </section>
 
-<!-- ==============================
+<!-- ============================================================
      TIMELINE
-============================== -->
+============================================================ -->
 <section class="timeline-section">
     <h2 class="section-heading">Nuestros Momentos</h2>
     <div class="timeline">
 
-        <!-- 1 — La primera vez -->
+        <!-- 1 — Primera foto (ella sola, Sacsayhuamán) -->
         <div class="tl-item" data-tl>
-            <div class="tl-dot"></div>
-            <div class="mem-card">
-                <p class="mem-label">El primer momento</p>
-                <span class="mem-emoji">✨</span>
-                <p class="mem-text">Cuando te vi por primera vez algo cambió. No lo sabía aún, pero ése fue el inicio de lo mejor que me ha pasado.</p>
+            <div class="tl-dot" style="background:#ffd93d; box-shadow:0 0 16px #ffd93d; color:#ffd93d;"></div>
+            <div class="first-photo-wrap">
+                <div class="polaroid">
+                    <img src="1.jpeg" alt="La primera foto" loading="lazy">
+                    <p class="polaroid-caption">Cusco — sin saber aún que te volvería mi mundo 🌿</p>
+                </div>
             </div>
         </div>
 
-        <!-- 2 — Foto polaroid -->
+        <!-- 2 — Texto sobre ese primer momento -->
         <div class="tl-item right" data-tl>
-            <div class="tl-dot" style="background:#a29bfe; box-shadow:0 0 14px #a29bfe;"></div>
-            <div class="polaroid-wrap">
-                <img src="https://lh3.googleusercontent.com/d/1OzYXTyIDTxqZTzaQk-xc1gpH5P8dwjEN" alt="Nosotros">
-                <p class="polaroid-caption">Tú y yo 💕</p>
+            <div class="tl-dot" style="background:#ffd93d; box-shadow:0 0 16px #ffd93d; color:#ffd93d;"></div>
+            <div class="mem-card">
+                <p class="mem-label">El inicio de todo</p>
+                <span class="mem-emoji">📸✨</span>
+                <p class="mem-text">Esta fue la primera foto que te tomé. En ese momento no lo sabía, pero mi cámara ya estaba capturando a la persona más importante de mi vida. Fue el principio sin saberlo.</p>
             </div>
         </div>
 
-        <!-- 3 — Las risas -->
+        <!-- 3 — Primera foto juntos -->
         <div class="tl-item" data-tl>
-            <div class="tl-dot" style="background:#ffd93d; box-shadow:0 0 14px #ffd93d;"></div>
-            <div class="mem-card">
-                <p class="mem-label">Las risas</p>
-                <span class="mem-emoji">😂💛</span>
-                <p class="mem-text">Contigo me reí de verdad. Esas carcajadas que no podías parar, que se te salían las lágrimas... me hacían el más afortunado del mundo.</p>
+            <div class="tl-dot" style="background:#a29bfe; box-shadow:0 0 16px #a29bfe; color:#a29bfe;"></div>
+            <div class="polaroid">
+                <img src="2.jpeg" alt="Primera foto juntos" loading="lazy" class="landscape">
+                <p class="polaroid-caption">La primera foto juntos 🤍</p>
             </div>
         </div>
 
-        <!-- 4 — Los viajes -->
+        <!-- 4 — Texto primera foto juntos -->
         <div class="tl-item right" data-tl>
-            <div class="tl-dot" style="background:#55efc4; box-shadow:0 0 14px #55efc4;"></div>
+            <div class="tl-dot" style="background:#a29bfe; box-shadow:0 0 16px #a29bfe; color:#a29bfe;"></div>
             <div class="mem-card">
-                <p class="mem-label">Los viajes</p>
-                <span class="mem-emoji">🌅✈️</span>
-                <p class="mem-text">Cada lugar que exploramos juntos se volvió nuestro. El mundo se veía diferente —más bonito— con tus ojos al lado de los míos.</p>
+                <p class="mem-label">La primera foto juntos</p>
+                <span class="mem-emoji">🏔️🤍</span>
+                <p class="mem-text">Aún no éramos nada oficial, pero ya estábamos juntos. Esta foto guarda el momento exacto en que empezamos a ser algo sin todavía llamarlo así.</p>
             </div>
         </div>
 
-        <!-- 5 — Los días sencillos -->
+        <!-- 5 — Primera foto ya en relación, selfie cercano -->
         <div class="tl-item" data-tl>
-            <div class="tl-dot" style="background:#fd79a8; box-shadow:0 0 14px #fd79a8;"></div>
-            <div class="mem-card">
-                <p class="mem-label">Los días tranquilos</p>
-                <span class="mem-emoji">🌸☕</span>
-                <p class="mem-text">No necesitábamos nada especial. Solo estar juntos ya era suficiente. Esos días sencillos eran mis favoritos de todos.</p>
+            <div class="tl-dot" style="background:#ff6b9d; box-shadow:0 0 16px #ff6b9d; color:#ff6b9d;"></div>
+            <div class="polaroid">
+                <img src="3.jpeg" alt="Primera foto en relación" loading="lazy">
+                <p class="polaroid-caption">La primera foto siendo tuyos 💕</p>
             </div>
         </div>
 
-        <!-- 6 — Lo que construimos -->
+        <!-- 6 — Texto primera foto en relación -->
         <div class="tl-item right" data-tl>
-            <div class="tl-dot" style="background:#74b9ff; box-shadow:0 0 14px #74b9ff;"></div>
+            <div class="tl-dot" style="background:#ff6b9d; box-shadow:0 0 16px #ff6b9d; color:#ff6b9d;"></div>
             <div class="mem-card">
-                <p class="mem-label">Lo que construimos</p>
-                <span class="mem-emoji">🏠❤️</span>
-                <p class="mem-text">Chistes internos, canciones, lugares, costumbres... creamos un mundo solo nuestro. Y ese mundo todavía existe.</p>
+                <p class="mem-label">Ya éramos novios</p>
+                <span class="mem-emoji">🥰❤️</span>
+                <p class="mem-text">La primera foto ya siendo pareja. Recuerdo esa sensación: saber que eras mía y yo era tuyo. No hay nada en el mundo que se compare a eso.</p>
+            </div>
+        </div>
+
+        <!-- 7 — Primer viaje, selfie atardecer -->
+        <div class="tl-item" data-tl>
+            <div class="tl-dot" style="background:#55efc4; box-shadow:0 0 16px #55efc4; color:#55efc4;"></div>
+            <div class="polaroid">
+                <img src="4.jpeg" alt="Primer viaje juntos" loading="lazy" class="landscape">
+                <p class="polaroid-caption">Nuestro primer viaje — el primero de muchos 🌇</p>
+            </div>
+        </div>
+
+        <!-- 8 — Texto primer viaje -->
+        <div class="tl-item right" data-tl>
+            <div class="tl-dot" style="background:#55efc4; box-shadow:0 0 16px #55efc4; color:#55efc4;"></div>
+            <div class="mem-card">
+                <p class="mem-label">Nuestro primer viaje</p>
+                <span class="mem-emoji">🌴✈️</span>
+                <p class="mem-text">El primero de los viajes que íbamos a tener juntos. Ese atardecer contigo me hizo pensar en todos los que aún nos faltaban por ver. Y todavía nos faltan.</p>
+            </div>
+        </div>
+
+        <!-- 9 — Primer viaje, ella bajo el arco de noche -->
+        <div class="tl-item" data-tl>
+            <div class="tl-dot" style="background:#74b9ff; box-shadow:0 0 16px #74b9ff; color:#74b9ff;"></div>
+            <div class="polaroid">
+                <img src="5.jpeg" alt="Primer viaje, de noche" loading="lazy">
+                <p class="polaroid-caption">El mismo viaje — y no quiero que sea el último 🌙</p>
+            </div>
+        </div>
+
+        <!-- 10 — Texto cierre timeline -->
+        <div class="tl-item right" data-tl>
+            <div class="tl-dot" style="background:#74b9ff; box-shadow:0 0 16px #74b9ff; color:#74b9ff;"></div>
+            <div class="mem-card">
+                <p class="mem-label">Quedan muchos más</p>
+                <span class="mem-emoji">🗺️💙</span>
+                <p class="mem-text">Este viaje no puede ser el último. Hay demasiados lugares que quiero conocer contigo, demasiadas fotos que aún nos faltan tomar. No quiero que esta sea la última página.</p>
             </div>
         </div>
 
     </div>
 </section>
 
-<!-- ==============================
+<!-- ============================================================
      BREAK — SAD SECTION
-============================== -->
+============================================================ -->
 <section class="break-section">
     <div class="fading-line"></div>
 
     <div class="empty-frame">
         <div class="ef-icon">📷</div>
-        <p>Este momento<br>aún no existe...</p>
+        <p>Esta foto<br>aún no existe...</p>
     </div>
 
     <div class="sad-message">
         <h2>"Aquí es donde me equivoqué."</h2>
         <div class="quote-bar">
-            <p>"Y no quiero que nuestra historia se detenga aquí. Merecemos más páginas, más risas, más fotos que llenen ese espacio vacío."</p>
+            <p>"Y no quiero que nuestra historia se detenga aquí. Merecemos más fotos, más lugares, más atardeceres que añadir a esta línea de tiempo."</p>
         </div>
-        <p class="body-text">Sé que cometí errores. No busco excusas. Solo sé que lo que tenemos es demasiado valioso para dejarlo ir sin intentarlo todo.</p>
+        <p class="body-text">Sé que fallé. No busco excusas. Solo sé que lo que tenemos —todo lo que esas fotos guardan— es demasiado valioso para dejarlo ir sin intentarlo todo.</p>
     </div>
 </section>
 
-<!-- ==============================
+<!-- ============================================================
      FINAL — BIG BUTTON
-============================== -->
-<section class="final-section" id="final">
+============================================================ -->
+<section class="final-section">
 
+    <!-- Using the close selfie as the final circle photo -->
     <img
-        src="https://lh3.googleusercontent.com/d/1OzYXTyIDTxqZTzaQk-xc1gpH5P8dwjEN"
+        src="3.jpeg"
         alt="Nosotros"
         class="final-photo"
     >
 
     <p class="final-pre">Todavía quiero escribir esto contigo</p>
-    <p class="final-body">No como terminamos, sino como merecemos: con amor, con respeto, con todo lo bueno que ya demostramos que somos capaces de darnos.</p>
+    <p class="final-body">No como terminamos, sino como merecemos: con más viajes, más risas, más fotos que llenar juntos.</p>
 
     <button class="forgive-btn" id="forgiveBtn">
         💕 ¿Me perdonas y seguimos escribiendo esto? 💕
@@ -708,13 +751,11 @@
 
     <div class="yes-response" id="yesResp">
         <h2>Te amo ❤️</h2>
-        <p>Gracias por darme otra oportunidad de ser la persona que mereces.</p>
+        <p>Gracias por darme otra oportunidad de ser la persona que mereces tener a tu lado.</p>
     </div>
 </section>
 
-<!-- ==============================
-     MUSIC PLAYER
-============================== -->
+<!-- Music player -->
 <div class="music-player">
     <button class="music-btn" id="playBtn">▶</button>
     <div class="music-info">
@@ -736,7 +777,7 @@
 
 <script>
     /* ---- FLOATING PETALS ---- */
-    const EMOJIS = ['❤️','🩷','💕','💗','💖','🌸','✨','🌺','💝'];
+    const EMOJIS = ['❤️','🩷','💕','💗','💖','🌸','✨','🌺','💝','🌼'];
     const petalsCont = document.getElementById('petals');
 
     function spawnPetal() {
@@ -744,15 +785,15 @@
         el.className = 'petal';
         el.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
         el.style.left = Math.random() * 100 + 'vw';
-        el.style.fontSize = (Math.random() * 18 + 10) + 'px';
+        el.style.fontSize = (Math.random() * 16 + 10) + 'px';
         const dur = Math.random() * 12 + 9;
         el.style.animationDuration = dur + 's';
-        el.style.animationDelay = Math.random() * 4 + 's';
+        el.style.animationDelay = (Math.random() * 4) + 's';
         petalsCont.appendChild(el);
         setTimeout(() => el.remove(), (dur + 5) * 1000);
     }
 
-    for (let i = 0; i < 10; i++) spawnPetal();
+    for (let i = 0; i < 12; i++) spawnPetal();
     setInterval(spawnPetal, 700);
 
     /* ---- TIMELINE SCROLL REVEAL ---- */
@@ -763,12 +804,12 @@
                 tlObs.unobserve(e.target);
             }
         });
-    }, { threshold: 0.18 });
+    }, { threshold: 0.15 });
 
     document.querySelectorAll('[data-tl]').forEach(el => tlObs.observe(el));
 
     /* ---- AUDIO ---- */
-    const audio  = document.getElementById('audio');
+    const audio   = document.getElementById('audio');
     const playBtn = document.getElementById('playBtn');
     const eq      = document.getElementById('eq');
     let playing   = false;
@@ -788,23 +829,16 @@
 
     /* ---- FORGIVE BUTTON ---- */
     document.getElementById('forgiveBtn').addEventListener('click', function () {
-        // Burst of petals
-        for (let i = 0; i < 22; i++) spawnPetal();
+        for (let i = 0; i < 25; i++) spawnPetal();
 
-        // Show response
         const resp = document.getElementById('yesResp');
         resp.classList.add('show');
 
-        // Start music
         audio.play().catch(() => {});
 
-        // Smooth scroll to response
         setTimeout(() => resp.scrollIntoView({ behavior: 'smooth', block: 'center' }), 350);
 
-        // Disable button to avoid spam
         this.disabled = true;
-        this.style.opacity = '0.6';
-        this.style.cursor = 'default';
     });
 </script>
 </body>
